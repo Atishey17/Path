@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import "./Navbar.css";
 import logo from "../../assets/logo.png";
-import DropDown from "../Drop_Down/DropDown";
 import { BiSolidBomb, BiMap } from "react-icons/bi";
 import { FaWeightHanging } from "react-icons/fa";
 import { GoGoal } from "react-icons/go";
@@ -18,6 +17,10 @@ export default function Navbar(props) {
     cursor,
     setCursor,
   ] = useContext(Context);
+
+  React.useEffect(() => {
+    setAlgorithm("Dijkstra");
+  }, [setAlgorithm]);
 
   const changeCursortoWeight = () => {
     setCursor((prevState) => {
@@ -39,14 +42,7 @@ export default function Navbar(props) {
   return (
     <div className="navb shadow-xl ">
       <img src={logo} alt="logo" className="img" />
-      <DropDown heading="Algorithm" />
-      <DropDown heading="Maze & Pattern" />
-      {/* <button className="btn">
-        <BiSolidBomb className="icon bombIcon" onClick={changeCursortoBomb} />+
-      </button> */}
-      <button className="btn weightIcon" onClick={changeCursortoWeight}>
-        <FaWeightHanging className="icon" />+
-      </button>
+      <h2 className="algorithm-text">Dijkstra Algorithm</h2>
       <button className="btn go " onClick={() => setVisualize(true)}>
         Visualize {Algorithm}
       </button>
@@ -60,8 +56,6 @@ export default function Navbar(props) {
         <h1>End</h1>
         <BiSolidBomb className="node wall" />
         <h1>Wall</h1>
-        {/* <BiSolidBomb className="icon" />
-        <h1>Bomb</h1> */}
         <FaWeightHanging className="icon" />
         <h1>Weight</h1>
         <BiSolidBomb className="node unvisited" />
